@@ -1,4 +1,24 @@
+import '../services/networking.dart';
+import '../services/location.dart';
+
 class WeatherModel {
+  NetworkingHelper networkingHelper;
+  Map<String, dynamic> weatherData;
+
+  Future<Map<String, dynamic>> getLocationWeather(Location myLocation) async {
+    networkingHelper = NetworkingHelper(
+        'https://api.openweathermap.org/data/2.5/weather?lat=${myLocation.latitude}&lon=${myLocation.longitude}&appid=182f64186d901bf6304b0b4bbbe1264d&units=metric');
+    weatherData = await networkingHelper.getData();
+    return weatherData;
+  }
+
+  Future<Map<String, dynamic>> getCityWeather(String cityName) async {
+    networkingHelper = NetworkingHelper(
+        'https://api.openweathermap.org/data/2.5/weather?q=$cityName&appid=182f64186d901bf6304b0b4bbbe1264d&units=metric');
+    weatherData = await networkingHelper.getData();
+    return weatherData;
+  }
+
   String getWeatherIcon(int condition) {
     if (condition < 300) {
       return '🌩';

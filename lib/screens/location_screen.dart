@@ -91,10 +91,17 @@ class _LocationScreenState extends State<LocationScreen> {
                       padding: EdgeInsets.only(left: 15.0),
                       child: Row(
                         children: <Widget>[
-                          Text(
-                            (weatherData['main']['temp']).toInt().toString() +
-                                '\u00b0C',
-                            style: kTempTextStyle,
+                          Container(
+                            width: MediaQuery.of(context).size.width * 0.5,
+                            child: FittedBox(
+                              child: Text(
+                                (weatherData['main']['temp'])
+                                        .toInt()
+                                        .toString() +
+                                    '\u00b0C',
+                                style: kTempTextStyle,
+                              ),
+                            ),
                           ),
                           Text(
                             '${WeatherModel().getWeatherIcon(weatherData['weather'][0]['id'])}',
